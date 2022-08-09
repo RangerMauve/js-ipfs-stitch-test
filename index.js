@@ -17,7 +17,7 @@ const { cid: newline } = await ipfs.add('\n')
 const data2 = 'Goodbye World'
 const { cid: cid2 } = await ipfs.add(data2)
 
-const expected = `${data2}\n${data2}`
+const expected = `${data1}\n${data2}`
 
 // Build a dag-pb node with links to the files
 const node = new UnixFS({ type: 'file' })
@@ -35,6 +35,8 @@ const links = [{
   TSize: data2.length
 }]
 
+links.map(({ TSize }) => node.addBlockSize(TSize))
+
 // Encode it into a block
 const encoded = encode(prepare({
   Data: node.marshal(),
@@ -45,8 +47,8 @@ const cid = await ipfs.block.put(encoded)
 
 const allDags = await Promise.all([cid, cid1, cid2, newline].map((id) => ipfs.dag.get(id)))
 
-console.log({ cid, cid1, cid2, newline})
-console.log(allDags.map(({value}) => value))
+console.log({ cid, cid1, cid2, newline })
+console.log(allDags.map(({ value }) => value))
 
 // Cat the entire file
 const chunks = []
