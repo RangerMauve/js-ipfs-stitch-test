@@ -35,8 +35,6 @@ const links = [{
   TSize: data2.length
 }]
 
-console.log({ cid1, cid2, newline })
-
 // Encode it into a block
 const encoded = encode(prepare({
   Data: node.marshal(),
@@ -44,6 +42,11 @@ const encoded = encode(prepare({
 }))
 
 const cid = await ipfs.block.put(encoded)
+
+const allDags = await Promise.all([cid, cid1, cid2, newline].map((id) => ipfs.dag.get(id)))
+
+console.log({ cid, cid1, cid2, newline})
+console.log(allDags.map(({value}) => value))
 
 // Cat the entire file
 const chunks = []
@@ -55,3 +58,5 @@ for await (const chunk of ipfs.cat(cid)) {
 const final = Buffer.concat(chunks).toString('utf8')
 
 console.log({ final, expected })
+
+await ipfs.stop()
