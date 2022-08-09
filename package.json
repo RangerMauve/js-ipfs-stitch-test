@@ -1,0 +1,27 @@
+{
+  "name": "js-ipfs-stitch-test",
+  "version": "1.0.0",
+  "description": "Testing out stitching a bunch of files together into a single file with IPFS",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "standard --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RangerMauve/js-ipfs-stitch-test.git"
+  },
+  "author": "rangermauve <ranger@mauve.moe> (https://mauve.moe/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RangerMauve/js-ipfs-stitch-test/issues"
+  },
+  "homepage": "https://github.com/RangerMauve/js-ipfs-stitch-test#readme",
+  "dependencies": {
+    "ipfs-core": "^0.15.4"
+  },
+  "devDependencies": {
+    "standard": "^17.0.0"
+  }
+}
