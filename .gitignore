@@ -1,3 +1,6 @@
+# Local IPFS repo should get ignored
+.ipfs
+
 # Logs
 logs
 *.log
